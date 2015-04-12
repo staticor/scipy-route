@@ -54,7 +54,13 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                 source = open(full_file_path, 'r').read()
                 try:
                     value = float(source.split(gather + ':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0])
-
+                    #value = float( re.split(gather + ':</td>(\n)?<td class="yfnc_tabledata1">', source).split('</td>')[0])
+                except Exception as e:
+                    try:
+                        value = float(source.split(gather + ':</td>\n<td class="yfnc_tabledata1">')[1].split('</td>')[0])
+                    except:
+                        pass
+                    print(str(e), ticker, file)
                     try:
                         sp500_date = datetime.fromtimestamp(unix_time ).strftime('%Y-%m-%d')
                         row = sp500_df[ (sp500_df.index == sp500_date)]
@@ -63,7 +69,19 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                         sp500_date = datetime.fromtimestamp(unix_time - 259200 ).strftime('%Y-%m-%d')
                         row = sp500_df[ (sp500_df.index == sp500_date)]
                         sp500_value = float(row['Adjusted Close'])
-                    stock_price = float(source.split('</small><big><b>')[1].split('</b></big>')[0])
+                    try:
+                        stock_price = float(source.split('</small><big><b>')[1].split('</b></big>')[0])
+                    except Exception as e:
+                        try:
+                            stock_price = source.split('</small><big><b>')[1].split('</b></big>')[0]
+                            stock_price = re.search(r'(\d{1, 8}\.\d{1,8})', stock_price)
+                            stock_price = float(stock_price.group(1))
+                            print(stock_price)
+
+                        except Exception as e :
+                            print(str(e))
+                            time.sleep(15)
+                        #print(str(e), ticker, file)
 
                     if not start_stock_price:
                         start_stock_price = stock_price
@@ -71,8 +89,6 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                         start_sp500_price = sp500_value
                     change_percent_stock = ( (stock_price - start_stock_price)/start_stock_price) * 100
                     change_percent_sp500 = ( (sp500_value - start_sp500_price)/start_sp500_price) * 100
-
-
                     start_stock_price = stock_price
                     start_sp500_price = sp500_value
                     df = df.append({'Date': date_stamp,
@@ -97,14 +113,16 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
             plot_df = plot_df.set_index(['Date'])
             plot_df['Difference'].plot(label=each_ticker)
             plt.legend()
+            
 
         except:
             pass
                 #time.sleep(3)
+    plt.show()
     save = gather.replace(' ', '').replace('(', '').replace(')', '').replace('/', '') + ('.csv')
     df.to_csv(save)
 
     df[['Price', 'SP500']].plot()
     df[['% change of stock', '% change of SP500']].plot()
-    plt.show()
+    
 Key_Stats()
