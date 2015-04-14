@@ -113,7 +113,7 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
             plot_df = plot_df.set_index(['Date'])
             plot_df['Difference'].plot(label=each_ticker)
             plt.legend()
-            
+
 
         except:
             pass
@@ -124,5 +124,5 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
 
     df[['Price', 'SP500']].plot()
     df[['% change of stock', '% change of SP500']].plot()
-    
+
 Key_Stats()
