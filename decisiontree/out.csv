@@ -1,0 +1,20 @@
+,Age,Education,Income,Status,Purchase?
+0,36-55,master's,high,single,will buy
+1,18-35,hihg-school,low,single,will buy
+2,18-35,bachelor's,high,single,won't buy
+3,belo18,hihg-school,low,single,will buy
+4,18-35,bachelor's,high,married,won't buy
+5,36-55,bachelor's,low,married,won't buy
+6,over55,bachelor's,high,single,will buy
+7,36-55,master's,low,married,won't buy
+8,over55,master's,low,married,will buy
+9,36-55,master's,high,single,will buy
+10,over55,master's,high,single,will buy
+11,belo18,hihg-school,high,single,won't buy
+12,36-55,master's,low,single,will buy
+13,36-55,hihg-school,low,single,will buy
+14,belo18,hihg-school,low,married,will buy
+15,18-35,bachelor's,high,married,won't buy
+16,over55,hihg-school,high,married,will buy
+17,over55,bachelor's,low,single,will buy
+18,36-55,hihg-school,high,married,won't buy
