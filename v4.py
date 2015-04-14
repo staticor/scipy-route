@@ -3,12 +3,15 @@
 Created on April , 2015
 @author: stevey
 '''
-import os
+import os,sys, re
 import time
 from datetime import datetime
 from pandas import DataFrame
-import sys
 import matplotlib.pyplot as plt
+from matplotlib import style
+style.use('ggplot')
+
+
 if sys.platform.startswith('darwin'):
     path = '/Users/staticor/Downloads/intraQuarter/_KeyStats/'  # mac
 else:
@@ -17,6 +20,7 @@ else:
 
 def Key_Stats(gather="Total Debt/Equity (mrq)"):
     stock_list = [x[0] for x in os.walk(path)]
+    
     df = DataFrame(columns=['Date', 'Unix', 'Ticker', 'DE Ratio'])
     sp500_df = DataFrame.from_csv('YAHOO-INDEX_GSPC.csv')
     for each_dir in stock_list[1:30]:

@@ -20,17 +20,91 @@ else:
     path = 'D:/intraQuarter/_KeyStats/'  # Windows
 
 
-def Key_Stats(gather="Total Debt/Equity (mrq)"):
+def Key_Stats(gather= ["Total Debt/Equity (mrq)",
+                       'Trailing P/E',
+                       'Price/Sales',
+                       'Price/Book',
+                       'Profit Margin',
+                       'Operating Margin',
+                       'Return on Assets',
+                       'Return on Equity',
+                       'Revenue Per Share',
+                       'Market Cap',
+                       'Enterprise Value',
+                       'Forward P/E',
+                       'PEG Ratio',
+                       'Enterprise Value/Revenue',
+                       'Enterprise Value/EBITDA', 
+                       'Revenue',
+                       'Gross Profit',
+                       'EBITDA',
+                       'Net Income Avl to Common ',
+                       'Diluted EPS',
+                       'Earnings Growth',
+                       'Revenue Growth',
+                       'Total Cash',
+                       'Total Cash Per Share',
+                       'Total Debt',
+                       'Current Ratio',
+                       'Book Value Per Share',
+                       'Cash Flow',
+                       'Beta', 
+                       'Held by Insiders',
+                       'Held by Institutions',
+                       'Shares Short (as of',
+                       'Short Ratio',
+                       'Short % of Float',
+                       'Shares Short (prior ']):
     stock_list = [x[0] for x in os.walk(path)]
     df = DataFrame(columns=['Date',
                             'Unix',
                             'Ticker',
+                            
+                            #########
                             'DE Ratio',
-                            'Price',
-                            'stock_p_change',
-                            'SP500',
-                            'sp500_p_change',
-                            'Difference',
+                            'Trailing P/E',
+                       'Price/Sales',
+                       'Price/Book',
+                       'Profit Margin',
+                       'Operating Margin',
+                       'Return on Assets',
+                       'Return on Equity',
+                       'Revenue Per Share',
+                       'Market Cap',
+                       'Enterprise Value',
+                       'Forward P/E',
+                       'PEG Ratio',
+                       'Enterprise Value/Revenue',
+                       'Enterprise Value/EBITDA', 
+                       'Revenue',
+                       'Gross Profit',
+                       'EBITDA',
+                       'Net Income Avl to Common ',
+                       'Diluted EPS',
+                       'Earnings Growth',
+                       'Revenue Growth',
+                       'Total Cash',
+                       'Total Cash Per Share',
+                       'Total Debt',
+                       'Current Ratio',
+                       'Book Value Per Share',
+                       'Cash Flow',
+                       'Beta', 
+                       'Held by Insiders',
+                       'Held by Institutions',
+                       'Shares Short (as of',
+                       'Short Ratio',
+                       'Short % of Float',
+                       'Shares Short (prior '
+                            
+                            
+                            
+                            ######
+#                            'Price',
+#                            'stock_p_change',
+#                            'SP500',
+#                            'sp500_p_change',
+#                            'Difference',
                             'Status'])
                             
     sp500_df = DataFrame.from_csv('YAHOO-INDEX_GSPC.csv')
@@ -52,15 +126,18 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                 date_stamp = datetime.strptime(file, '%Y%m%d%H%M%S.html')
                 unix_time = time.mktime(date_stamp.timetuple())
                 full_file_path = each_dir + '/' + file
-                #print(full_file_path)
                 source = open(full_file_path, 'r').read()
                 try:
-                    try:
-                        value = float(source.split(gather + ':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0])
-                    except Exception as e:
-                        value = float(source.split(gather + ':</td>\n<td class="yfnc_tabledata1">')[1].split('</td>')[0])
-                        #print(str(e), ticker, file)
-
+                    value_list = []
+                    for each_data in gather:
+                        try:
+                            regex = re.escape(each_data) + r'.*?(\d{1, 8}\.\d{1, 8}M?B?K?|N/A)%?</td>'
+                            
+                            
+                        
+                        except Exception as e:
+                            value = "N/A"
+                            value_list.append(value)
                     try:
                         sp500_date = datetime.fromtimestamp(unix_time ).strftime('%Y-%m-%d')
                         row = sp500_df[ (sp500_df.index == sp500_date)]
