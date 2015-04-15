@@ -32,21 +32,21 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                             'sp500_p_change',
                             'Difference',
                             'Status'])
-                            
+
     sp500_df = DataFrame.from_csv('YAHOO-INDEX_GSPC.csv')
-    
+
     ticker_list = []
     # define old price to calculate the percentage of change.
-    
-    
+
+
     for each_dir in stock_list[1:10]:
         each_file = os.listdir(each_dir)
         ticker = each_dir.split('/')[-1]
         ticker_list.append(ticker)
-        
+
         start_stock_price = False
-        start_sp500_price = False        
-        
+        start_sp500_price = False
+
         if len(each_file) > 0:
             for file in each_file:
                 date_stamp = datetime.strptime(file, '%Y%m%d%H%M%S.html')
