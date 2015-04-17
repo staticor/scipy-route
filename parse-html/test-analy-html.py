@@ -4,13 +4,9 @@ Created on April , 2015
 @author: stevey
 '''
 
-# import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# from pandas import Series, DataFrame
-# import os, sys
 import re
 from bs4 import BeautifulSoup
+
 
 file1 = '20040203073334.html'
 source = open(file1, 'r').read()
