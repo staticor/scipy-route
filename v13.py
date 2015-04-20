@@ -14,7 +14,7 @@ Created on April , 2015
 @python love love love, you can make your best.!!
 '''
 
-FEATURES = 'DE Ration',
+FEATURES =  ['DE Ratio',
                        'Price/Sales',
                        'Price/Book',
                        'Profit Margin',
@@ -52,6 +52,7 @@ FEATURES = 'DE Ration',
 
 def build_data_set(features=FEATURES):
     data_df = pd.DataFrame.from_csv('key_stat.csv')
+    data_df = data_df.fillna(0)
     data_df = data_df[:100]
     X = np.array(data_df[features].values ) #.tolist())
     y = (data_df['Status']
@@ -62,7 +63,7 @@ def build_data_set(features=FEATURES):
     # 数据标准化
     X = preprocessing.scale(X)
     pdx = pd.DataFrame(X)
-    print(sum(pd.isnull(X)))
+    #print(sum(pd.isnull(X)))
     # print(y)
     return  X, y
 
@@ -91,5 +92,5 @@ Analysis()
 
 
 # 收获 怎样做数据标准化
-
-# processing, scale
+# sklearn 中的 数据预处理模块.
+# preprocessing, scale
