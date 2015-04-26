@@ -152,6 +152,7 @@ In one dimension, this requires on average *n/d*. In the KNN context, if data is
 
 If the number of features is *p*, such as p=10, you now require d**10 points in 10 dimensions to pave the [0, 1] space. As p becomes large, the number of training points required for a good estimator.
 
+这一部分的描述我自己还没有完全理会， 参考[wiki](http://en.wikipedia.org/wiki/Curse_of_dimensionality)的内容也许能有更多收获。 
 
 ## Linear Regression
 
@@ -236,21 +237,163 @@ for _ in range(6):
     pl.scatter(this_X, y, s=3)
 
 pl.show()
+
+# trade off
+regr = linear_model.Ridge(alpha=0.1)
+pl.figure()
+np.random.seed(0)
+for _ in range(6):
+    this_X = 0.1 * np.random.normal(size=(2,1)) + X
+    regr.fit(this_X, y)
+    pl.plot(test, regr.predict(test))
+    pl.scatter(this_X, y, s=3)
 ```
 
+Ridge回归中的参数alpha， 实际上是对模型无偏性造成影响， alpha值越大， 模型越有偏， 方差越小。 
+
 ### Lasso
+Lasso is the abbreviation of **Least Absolute Shrinkage and Selection Operator**, can set some coefficients to zero.
+Such methods are called sparse method and sparsity can be seen as an application of Occam's razor : prefer simpler models.
+
+
+
+```
+
+from __future__ import print_function
+
+from sklearn.linear_model import LinearRegression
+from sklearn import linear_model
+import pylab as pl
+pl.figure()
+import numpy as np
+from sklearn import datasets
+diabetes = datasets.load_diabetes()
+np.random.seed(1424)
+indices = np.random.permutation(len(diabetes.data))
+diabetes_X_train = diabetes.data[indices[:-20]]
+diabetes_X_test = diabetes.data[indices[-20:]]
+diabetes_y_train = diabetes.target[indices[:-20]]
+diabetes_y_test = diabetes.target[indices[-20:]]
+
+alphas = np.logspace(-4, -1, 6)
+regr = linear_model.Lasso()
+scores = [regr.set_params(alpha=alpha).fit(diabetes_X_train, diabetes_y_train).score(diabetes_X_test, diabetes_y_test) for alpha in alphas]
+
+best_alpha = alphas[scores.index(max(scores))]
+regr.alpha = best_alpha
+
+print(regr.fit(diabetes_X_train, diabetes_y_train))
+print(regr.coef_)
+```
+
+`Different algorithms for the same problem`
+For the same mathematical problem, we can use different algorithms. For instance the *Lasso* object in scikit-learn solves the *lasso* regression problem using a coordinate decent method, that is efficient on large datasets. 
+However, there is another algorithm named *LassoLars* using the **LARS**, which is very efficient for problems in which the weight vector estimated is ver sparse (i.e. problems with very few observations).
 
 
 
 
+## Classification
+
+Here we will use *iris* datasets, in which linear regression is not the right approach. 
+
+But someone have used linear regression's function to be as a classifier -- a sigmoid function or logistic function like follows:  
+
+![img](http://ww3.sinaimg.cn/bmiddle/5810d07bjw1erj2bx1kg3j20cu015746.jpg)
+
+`Logistic Regression`
+
+```
+logistic = linear_model.LogisticRegression(C=1e5)
+print(logistic.fit(iris_X_train, iris_y_train))
+
+```
+
+Often to say, the logistic regression is to be used as a classifier of binary classification problem.
+
+#### Logistic Regression in Sklearn
+
+[Sklearn Doc](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression)
+`sklearn.linear_model.LogisticRegression`
+
+`model Parameter`
+
+* penalty=   'l1'  or  'l2'
+		Used to specify the norm used in the penalization.  (Newton-Cg and lbfgs solvers support only l2 penalties)
+* dual=   True or False
+		Dual or Primal formulation.  Dual formulation is only implemented for l2 penalty with liblinear solver. Prefer dual=False when n_samples > n_features.
+* tol=  FLOAT optional
+		tolerance for stopping criteria.  「迭代停止准则」
+* C= 1.0 (default)  positive float
+		Inverse of regularization strength. Smaller values specify strnger regularization. 
+* fit_intercept= True(default) or False
+		if model is with bias(y-intercept is not equal to zero), True. 
+* intercept_scaling = 1 (default)  |float
+		useful only if solver is liblinear. 
+* class_weight= {dict, 'auto'}  
+		The 'auto' mode selects weights inversely proportional to class frequencies in the training set. 
+* random_state=  INT seed,  RandomState instance, or None(default)
+		The seed of pseudo random number generator to use when shuffling the data. 
+* solver= {'newton-cg', 'lbfgs', 'liblinear'}
+		Algorithm to use in the optimization problem. 
+* max_iter=  INT type
+		useful only for the newton-cg and lbfgs solvers. Maximum number of iterations taken for the solvers to converge. 
+* multi_class= {'ovr', 'multinomial'}
+		ovr: a binary problem is fit for each label. 
+		else (multi class), the loss minimised is the multinomial loss fit across the entire probability distribution. Works only for the 'lbfgs' solver.
+* verbose= INT
+		For the liblinear and lbfgs solvers set verbose to any positive number fo verbosity.
+		
+		
+== == == == == == == == == == == == == == ==
+
+modeler attributes:
+
+* coef_: like ols model, type-array | shape (n_classes, n_features). 
+* intercept_ : array, shape(n_classes). 
+* n_iter_ int,   Maximum of the actual number of iteration.
 
 
 
+	
+
+## Support Vector Machines(SVMs) 
+
+SVMs belongs to the discriminant model family. They try to find a line combining samples to build a plane maximizing the margin between two classes.
+
+`Regularization`
+Regularization is set by the *c* parameter: smaller *c* means the margins is calculated using many or all observations around the separating line; larger value *c* means the margin is calculated on observations close to the line (less regularization). 
+
+![](http://ww2.sinaimg.cn/large/5810d07bjw1erjayrinmdj215q0fuju3.jpg)
+
+
+### Example: [Plot-Iris](http://scikit-learn.org/stable/auto_examples/svm/plot_iris.html#example-svm-plot-iris-py)
+
+
+At first We consider the 2 features of this dataset:
+* Separ length
+* Separ width
+
+We'll show how to plot the decision surface(hyper-line) for four SVM classifiers with different kernels.
+
+`LinearSVC`
+
+The Linear Models **LinearSVC()** and **SVC(kernel='linear')** yield slight different decision boundaries. 
+
+* LinearSVC minimizes the squared hinge loss while minimize the regular hinge loss;
+* LinearSVC uses the One-vs-All (also known as One-vs-Rest) multiclass reduction while SVC uses the One-vs-One multiclass reduction. 
+
+`Linear vs Non-linear model`
+
+Linear Model often gives linear boundaries when being classifier. Whereas, non-linear model are more flexible with shapes that depend on kind of kernel and its parameters, such polynomial or Gaussian RBF model. 
+
+``` code: plot_iris.py
 
 
 
+```
 
-
+![](http://ww2.sinaimg.cn/large/5810d07bjw1erjfd8e2mkj20v20oyn29.jpg)
 
 ## Model Selection
 
