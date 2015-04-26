@@ -1,4 +1,5 @@
-
+Introduction of Sklearn
+----
 
 
 # scikit-learn
@@ -387,13 +388,38 @@ The Linear Models **LinearSVC()** and **SVC(kernel='linear')** yield slight diff
 
 Linear Model often gives linear boundaries when being classifier. Whereas, non-linear model are more flexible with shapes that depend on kind of kernel and its parameters, such polynomial or Gaussian RBF model. 
 
-``` code: plot_iris.py
+code: [plot_iris.py](https://raw.githubusercontent.com/staticor/scipy-route/bf0ddd833b5eb43a1d09b370eb53c6f79580d97c/dataset/plot_iris.py)
 
 
-
-```
 
 ![](http://ww2.sinaimg.cn/large/5810d07bjw1erjfd8e2mkj20v20oyn29.jpg)
+
+
+
+
+### SVR
+SVMs are often used as typical classifier, however, they actually also can be used in regression. 
+So in sklearn you will import svm, and then use its svc function. 
+
+* from sklearn import svm
+* svc = svm.SVC(...)
+
+
+`Normalizing Data`
+For many situations, including SVMs, having datasets with unit std. for each feature is important to get good prediction.
+
+`SVM's kernel`
+
+* svm.SVC(kernel='linear')
+* ... kernel = 'poly', degree=3
+* ... kernel = 'rbf'   # Radial Basis Function
+
+
+#### Libsvm 
+
+`GUI`
+
+[libsvm_gui](http://scikit-learn.org/stable/auto_examples/applications/svm_gui.html#example-applications-svm-gui-py)
 
 ## Model Selection
 
@@ -408,5 +434,5 @@ In this picture you can get a first eye of use guiding.
 
 
 
-关于模型选择
+关于模型选择, [sklearn](http://scikit-learn.org/stable/tutorial/statistical_inference/model_selection.html) 给出了相关的建议。
 
