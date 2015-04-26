@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-Created on Mar , 2015
+Created on April , 2015
 @author: stevey
 '''
 
@@ -27,4 +27,15 @@ plt.show()
 
 
 clf = svm.SVC()
-print(iris)
+# print(iris)
+X, y = iris.data, iris.target
+clf.fit(X, y)
+
+import pickle
+# save former clf (model)
+s = pickle.dumps(clf)
+clf2 = pickle.loads(s)
+print(clf2.predict(X[0]))
+
+
+
