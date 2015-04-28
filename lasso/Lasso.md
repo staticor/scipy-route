@@ -124,3 +124,14 @@ However, such criteria needs a proper estimation of the degress of freedom of th
 * 
 
 
+# Elastic Net
+
+
+
+# LARS Lasso
+
+**LassoLars** is a lasso model 
+
+[Lasso path using LARS](http://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_lars.html#example-linear-model-plot-lasso-lars-py)
+
+[code]()
