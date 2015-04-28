@@ -1,8 +1,10 @@
 Introduction of Sklearn
 ----
 
+Date: Apr - 2015 
+I start to learn scikit-learn for the package as my jigsaw of machine learning. Combining a book <Statistical Learning Methodology> (author: Dr.Li Hang in Huawei), I begin to step into the world of MachineLearning.
 
-# scikit-learn
+2015年四月, 我打算看看Sklearn这个著名的Python下的第三方机器学习工具. 另结合了手头上的李航Doctor的**<统计学习方法>**, 作为今年的学习目标的第一步.
 
 ## install 
 
@@ -10,18 +12,27 @@ The [install page](http://scikit-learn.org/stable/install.html) provides varies 
 For me, it's simple, just typing this line on Terminal:
 `pip install -U scikit-learn`
 
-sklearn包的安装很简单， 参考本链接。 
+Considering later examples code which also use numpy & matplotlib, my suggestion is that just `pip them all`. 
+
+sklearn包的安装很简单， 不管是Windows或者Mac\Linux环境, 都提供了各自的方式。 
+另外在后续的例子学常用到numpy和Matplotliby也请一起安装.
 
 * import 
 
 There have many useful sub-libraries in scikit-learn(i.e. sklearn for short). As usual, **import \*** is absolutely not a good way to do that. Just import those libraries or specified functions to be used. 
 
 from sklearn import xxx
+
+And it is a good way to keep your code in a elegant way not only using sklearn. In my another blog <[suggestions to improve your python code>](http://staticor.io/post/gai-shan-pythondai-ma-de-ji-tiao-jian-yi-fan-yi) mentioned this.
  
+在sklearn包中, 拥有各式各样的(现在还在不断扩充中)机器学习模型, 因此
 如无特别注明， 建议用此形式对sklearn中的包进行引用。 
+在我以前瞎翻译的一篇文章[<改善Python代码的建议>](http://staticor.io/post/gai-shan-pythondai-ma-de-ji-tiao-jian-yi-fan-yi)中, 也有与此相关的建议. 
+
 
 ## dataset 
 
+When we want to learn machine learning, we need some dataset to analysis. The difficult for new guys is they do not know what kind of datasets is match to the model. 
 
 sklearn have prepared some datasets, for instance the [iris](http://en.wikipedia.org/wiki/Iris_flower_data_set) [digits](http://archive.ics.uci.edu/ml/datasets/Pen-Based+Recognition+of+Handwritten+Digits) 
 
@@ -43,8 +54,8 @@ The diabetes dataset consists of 10 healthy variable related to deabetes (age, s
 
 ```
 
-# Diabetes dataset
-# Prepare for modeling -- splitting dataset
+#>> Diabetes dataset
+#>> Prepare for modeling -- splitting dataset
 diabetes = datasets.load_diabetes()
 indices = np.random.permutation(len(diabetes.data))
 diabetes_X_train = diabetes.data[indices[:-20]]
