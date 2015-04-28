@@ -2,6 +2,9 @@
 import numpy as np
 from sklearn import linear_model, datasets
 import matplotlib.pyplot as plt
+from matplotlib import style
+style.use('ggplot')
+
 # ols
 
 
