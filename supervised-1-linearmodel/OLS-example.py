@@ -16,7 +16,6 @@ print(clf.coef_, clf.intercept_)
 diabetes = datasets.load_diabetes()
 diabets_x_data = diabetes.data[:, np.newaxis]
 diabets_x_data = diabets_x_data[:, :, 2]
-
 diabets_X_train = diabets_x_data[:-20]
 diabets_X_test = diabets_x_data[-20:]
 diabets_y_train = diabetes.target[:-20]

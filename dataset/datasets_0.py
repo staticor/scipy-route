@@ -14,14 +14,6 @@ print(digits.data)
 print(len(digits.data[0]), len(digits.data))
 print(digits.target, len(digits.target))
 
-from sklearn import svm
-clf = svm.SVC(gamma=0.001, C=100)
-clf.fit(digits.data[:-1], digits.target[:-1])
-print('predict result: {ele}'.format(ele=clf.predict(digits.data[-1])))
-import matplotlib.pyplot as plt
-img = digits.data[-1].reshape(8, 8)
-plt.imshow(img)
-plt.show()
 
 
 
@@ -38,4 +30,11 @@ clf2 = pickle.loads(s)
 print(clf2.predict(X[0]))
 
 
+from sklearn import datasets
+diabetes = datasets.load_diabetes()
+
+d_data = diabetes.data
+d_y = diabetes.target
+print(d_data.shape)
+print(d_data[1])
 
