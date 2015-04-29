@@ -37,7 +37,6 @@ When we want to learn machine learning, we need some dataset to analysis. The di
 sklearn have prepared some datasets, for instance the [iris](http://en.wikipedia.org/wiki/Iris_flower_data_set) [digits](http://archive.ics.uci.edu/ml/datasets/Pen-Based+Recognition+of+Handwritten+Digits) 
 
 
-
 `Digits`
 Pen-Based Recognition of Handwritten Digits Dataset
 10992 instances, 16 Attributes, No missing values,
@@ -69,12 +68,11 @@ sklearn已经内置了一些经典的数据集， 如用于判别分析的IRIS, 
 
 ### load_data
 
-Build-in datasets are imported throuthis:
+Build-in datasets are imported through this:
 `from sklearn import datasets`
 
 ```
 iris = datasets.load_iris()
-
 digits = datasets.load_digits()
 ```
 And then you could use these two datasets.
@@ -90,7 +88,10 @@ print(digits.target, len(digits.target))
 
 ```
 
-一般来说是用.data, .target来区别数据集中的各元素。
+In Most of cases, .data, .target means the X input and Y target.
+
+一般来说是用.data, .target来区别数据集中的各元素, .data 往往表示的输入数据X, .target表示预测数据target。
+
 
 ### Simple Case
 
@@ -119,14 +120,16 @@ When you built a model, you could store it and use it for different situations b
 [The python code is uploaded in github](https://github.com/staticor/scipy-route/tree/master/dataset).
 
 
+![](http://ww3.sinaimg.cn/bmiddle/5810d07bjw1erlcdjqkp5j206t03mdg9.jpg)
 
-
+Okay, Now Lets talk about machine learning with sklearn.
 
 ## Machine Learning Introduction
 
-下面是对机器学习的简单介绍， 很浅显， 希望能够对你有所帮助。 
+下面是对机器学习的简单介绍 >>> 
 
 What is the problem setting of machine learning?
+
 > In general, a learning problem considers a set of samples of data and then tries to predict the unknown data's properties.
 
 There has a few large categories:
@@ -146,9 +149,15 @@ I think supervised learning is my first step to deep in.
 ## Training set and Testing set
 
 Simply to understand, the training set is to build a model, being applied to the testing set.
+This is like you are a blacksmith who just made a sword, and you hoped to test the sharp of sword. So you find some iron. 
+
+period, period, period... 
+
+... I realized a poor story have just been made.
+
 
 对于数据集的划分， 对于supervised类的模型常把数据集分成训练集和预测集。 
-
+所以模型的建立只是利用数据集迈出的第一步, 接下来还要对一些未知的数据进行验证.
 
 
 ### Exmaples of supervised learning
@@ -156,15 +165,9 @@ Simply to understand, the training set is to build a model, being applied to the
 `predicting an output variable from high-dimensional observations`
 Supervised learning is to find the link between two datasets: input X and y to predict (also called labels). Most often, y is a 1D array data. 
 
+关于有督学习将会下面进行举例.
 
-### The curse of dimensionality 
 
-For an estimator to be effective, you need the distance between neighboring points to be less some value **d**, which depends on the problem. 
-In one dimension, this requires on average *n/d*. In the KNN context, if data is described by just one feature with values ranging from 0 to 1, and with n training observations, then new data will be no further away from 1/n. Therefore, the NN decision rule will be efficient as soon as 1/n si small compared to the scale of between-class feature variations.
-
-If the number of features is *p*, such as p=10, you now require d**10 points in 10 dimensions to pave the [0, 1] space. As p becomes large, the number of training points required for a good estimator.
-
-这一部分的描述我自己还没有完全理会， 参考[wiki](http://en.wikipedia.org/wiki/Curse_of_dimensionality)的内容也许能有更多收获。 
 
 ## Linear Regression
 
