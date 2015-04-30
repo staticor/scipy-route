@@ -14,4 +14,5 @@ print('predict result: {predict_result}'.format(predict_result=clf.predict(digit
 # show the real img
 img = digits.data[-1].reshape(8, 8)
 plt.imshow(img)
-plt.show()
+# plt.show()
+
