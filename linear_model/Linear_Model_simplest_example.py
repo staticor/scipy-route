@@ -3,6 +3,7 @@ import numpy as np
 from sklearn import linear_model
 import matplotlib.pyplot as plt
 from matplotlib import style
+import PyQt4
 style.use('ggplot')
 
 
@@ -40,5 +41,6 @@ regr_equation = 'y = {w1}x  {intercept}'.format(w1=regr.coef_[0], intercept=regr
 plt.xlabel('input x')
 plt.ylabel('target y')
 plt.title(regr_equation)
-
+print('to draw...')
 plt.show()
+print('done')
