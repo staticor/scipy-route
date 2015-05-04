@@ -11,7 +11,9 @@ X = [p1, p2]
 clf = tree.DecisionTreeClassifier()
 clf.fit(X, Y)
 predict = [2, 2]
-print clf.predict([predict ])
+print clf.predict([predict])
+print clf.predict_proba([[2, 2.1]])
+
 
 ## DecisionTreeClassifier for multi-classification
 
