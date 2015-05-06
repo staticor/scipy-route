@@ -19,12 +19,11 @@ from sklearn.linear_model import LinearRegression, RidgeCV
 #
 
 data = fetch_olivetti_faces()
-# print(data)
-
 targets = data.target
 data = data.images.reshape((len(data.images), -1))
+# Split dataset -- train  target   }}} test: >=30
 train = data[targets < 30]
-test = data[targets >= 30] # Test on independent people
+test = data[targets >= 30]
 
 print('the test-shape:',test.shape) # 100, 4096
 # Test on a subset of people
@@ -33,8 +32,6 @@ rng = check_random_state(4)
 face_ids = rng.randint(test.shape[0], size=(n_faces, ))
 print face_ids
 test = test[face_ids, :]
-# print(test)
-#
 n_pixels = data.shape[1]
 X_train = train[:, : np.ceil(0.5*n_pixels)] # 上半张脸
 y_train = train[:, np.floor(0.5* n_pixels):] # 下半张脸
@@ -58,10 +55,8 @@ for name, estimator in ESTIMATORS.items():
 
 # plot the complete faces
 image_shape = (64, 64)
-
 n_cols = 1 + len(ESTIMATORS)
 plt.figure(figsize=(2 * n_cols, 2.26 * n_faces))
-
 plt.suptitle("Face completion with multi-output estimators", size=16)
 
 for i in range(n_faces):

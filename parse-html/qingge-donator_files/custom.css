@@ -1,0 +1,148 @@
+
+/* navbar */
+.site-title {
+    background: transparent url('../img/logo.png') no-repeat 10px 10px;
+    padding-left: 50px;
+    padding-top: 17px;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+    .site-title:hover {
+        background: transparent url('../img/logo2.png') no-repeat 10px 10px;
+    }
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    background-color: #E7E7E7;
+}
+
+/* home */
+.info-dl.dl-horizontal {
+    display: inline-block;
+}
+    .info-dl.dl-horizontal dt {
+        width: 100px;
+    }
+    @media (min-width: 768px) {
+        .info-dl.dl-horizontal dd {
+            margin-left: 100px;
+            padding-left: 10px;
+            text-align: left;
+        }
+    }
+    @media (max-width: 768px) {
+        .info-dl.dl-horizontal dd {
+            margin-left: 2em;
+            text-align: left;
+        }
+    }
+
+.share-wb {
+    margin-bottom: -10px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background: transparent url('../img/share-wb.png') no-repeat left top;
+}
+    .share-wb:hover {
+        background: url("../img/weibo.png") no-repeat left top;
+    }
+
+.share-tw {
+    margin-bottom: -10px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background: transparent url('../img/share-tw.png') no-repeat center center;
+}
+    .share-tw:hover {
+        background: url("../img/twitter.png") no-repeat center center;
+    }
+
+/* feature */
+.btn#features {
+    margin-top: 20px;
+}
+
+.feature-dl.dl-horizontal dt {
+    width: 70px;
+}
+@media (min-width: 768px) {
+    .feature-dl.dl-horizontal dd {
+        margin-left: 90px;
+    }
+}
+@media (max-width: 768px) {
+    .feature-dl.dl-horizontal dd {
+        margin-left: 1em;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .sidebar-nav .affix {
+        position: static;
+        width: auto;
+        top: 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    .sidebar-nav {
+        margin-left: 740px;
+        position: fixed;
+    }
+}
+
+/* feedback */
+.feedback-email {
+    background: transparent url("../img/gmail.png") no-repeat left center;
+    padding-left: 40px;
+    padding-top: 1px;
+}
+
+/* donate */
+
+.donate-imgs {
+    margin-bottom: 30px;
+}
+
+.wxpay-img {
+    margin-top: 5px;
+    width: 115px;
+}
+
+.bitcoin {
+    background-image: url("../img/BitCoin.png");
+    background-color: transparent;
+    background-size: 37px 37px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 42px;
+    padding-top: 1px;
+    width: 170px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.bitcoin small {
+    font-size: 10px;
+}
+
+.short-donate-button {
+    margin-top: 50px;
+}
+
+/* feedback */
+.feedback-wb {
+    background: transparent url("../img/weibo.png") no-repeat left center;
+    padding-left: 40px;
+    padding-top: 4px;
+}
+
+.feedback-tw {
+    background: transparent url("../img/twitter.png") no-repeat left center;
+    padding-left: 40px;
+    padding-top: 4px;
+}
+
