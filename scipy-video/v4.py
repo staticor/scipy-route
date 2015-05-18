@@ -20,7 +20,7 @@ else:
 
 def Key_Stats(gather="Total Debt/Equity (mrq)"):
     stock_list = [x[0] for x in os.walk(path)]
-    
+
     df = DataFrame(columns=['Date', 'Unix', 'Ticker', 'DE Ratio'])
     sp500_df = DataFrame.from_csv('YAHOO-INDEX_GSPC.csv')
     for each_dir in stock_list[1:30]:
@@ -45,21 +45,20 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                         row = sp500_df[ (sp500_df.index == sp500_date)]
                         sp500_value = float(row['Adjusted Close'])
                     stock_price = float(source.split('</small><big><b>')[1].split('</b></big>')[0])
-                    
-                    df = df.append({'Date': date_stamp, 
-                    'Unix': unix_time, 
-                    'Ticker': ticker, 
+
+                    df = df.append({'Date': date_stamp,
+                    'Unix': unix_time,
+                    'Ticker': ticker,
                     'DE Ratio': value,
                     'Price': stock_price,
-                    'SP500': sp500_value}, 
-                    
+                    'SP500': sp500_value},
                     ignore_index=True)
                 except Exception as e:
                     pass
                 #time.sleep(3)
     save =gather.replace(' ', '').replace('(', '').replace(')', '').replace('/', '') + ('.csv')
     df.to_csv(save)
-    
+
     df[['Price', 'SP500']].plot()
     plt.show()
 Key_Stats()
