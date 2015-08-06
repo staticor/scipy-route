@@ -13,13 +13,14 @@ from pandas import Series, DataFrame
 import sys
 
 if sys.platform.startswith('darwin'):
-    path = '/Users/staticor/Downloads/intraQuarter/_KeyStats/' # mac
+    path = '/Users/staticor/Downloads/intraQuarter/_KeyStats/'  # mac
 else:
-    path = 'D:/intraQuarter/_KeyStats'# Windows
+    path = 'D:/intraQuarter/_KeyStats'  # Windows
+
 
 def Key_Stats(gather="Total Debt/Equity (mrq)"):
-    stock_list = [ x[0] for x in os.walk(path)]
-    #print(stock_list)
+    stock_list = [x[0] for x in os.walk(path)]
+    # print(stock_list)
     for each_dir in stock_list[1:]:
         each_file = os.listdir(each_dir)
         ticker = each_dir.split('/')[-1]
@@ -31,15 +32,14 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
                 full_file_path = each_dir + '/' + file
                 print(full_file_path)
                 source = open(full_file_path, 'r').read()
-                #print(source)
+                # print(source)
                 try:
-                    value = float(source.split(gather+':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0])
-                    print(ticker+':' ,  value)
+                    value = float(source.split(
+                        gather + ':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0])
+                    print(ticker + ':',  value)
                 except Exception as e:
                     pass
                 time.sleep(3)
 
 
-
 Key_Stats()
-
